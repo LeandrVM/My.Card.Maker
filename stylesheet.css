@@ -1,0 +1,91 @@
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+main {
+    border: 2px solid rgb(241, 0, 0);
+    border-radius: 10px;
+    max-width: 1200px;
+    max-height: 800px;
+    width: 1200px;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+}
+div {
+    border: 1px solid black;
+}
+.preview {
+    width: 600px;
+    height: 600px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.editor {
+    width: 700px;
+    height: 600px;
+    border-radius: 0px 10px 10px 0px;
+}
+.ttlpreview {
+    border-radius: 10px 0px 0px 0px;
+    height: 90px;
+    width: 600px
+}
+
+.cardseditor {
+    height: 300px;
+    width: 600px;
+    border-radius: 0px 10px 0px 0px;
+
+}
+
+.ttlcards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+    height: 45px;
+    width: 600px;
+    border-radius: 0px 10px 0px 0px;
+}
+.edit {
+
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 600px;
+}
+.selectcards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 45px;
+    width: 600px;
+    border-radius: 0px 10px 0px 0px;
+}
+.editop {
+    display: flex;
+    flex-direction: row;
+    height: 255px;
+    width: 600px;
+    max-width: 600px;
+}
+.op {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
