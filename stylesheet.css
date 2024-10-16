@@ -1,5 +1,7 @@
 body {
-
+    background-image: url('Imagens/Texture.png'); 
+    background-repeat: repeat; 
+    background-size: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,8 +9,7 @@ body {
 
 }
 main {
-    border: 2px solid rgb(241, 0, 0);
-    border-radius: 10px;
+    border-radius: 20px;
     max-width: 1200px;
     max-height: 800px;
     width: 1200px;
@@ -18,15 +19,28 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
-    
+    background-color: #e7ddd3;
+    padding: 10px;
+    box-shadow: 10px 10px 20px black;
 }
-div {
-    border: 1px solid black;
-}
+
 .preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 600px;
     height: 600px;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 15px 0px 0px 15px;
+    background-color: #c0c2bd;
+}
+
+.prepreview {
+    width: 590px;  
+    height: 500px;
+    border-radius: 10px;
+    background-color: rgb(92, 148, 148);
+    border: solid 10px #c0c2bd ;
 }
 
 .editor {
