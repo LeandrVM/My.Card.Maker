@@ -32,32 +32,44 @@ main {
     width: 600px;
     height: 600px;
     border-radius: 15px 0px 0px 15px;
-    background-color: #c0c2bd;
+    background-color: #374735;
 }
 
 .prepreview {
-    width: 590px;  
+    width: 550px;  
     height: 500px;
+    top: 60px;
     border-radius: 10px;
-    background-color: rgb(92, 148, 148);
-    border: solid 10px #c0c2bd ;
+    background-color: #c0c2bd;
 }
 
 .editor {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 700px;
     height: 600px;
     border-radius: 0px 10px 10px 0px;
+    background-color: #465743;
+    gap: 5px;
 }
 .ttlpreview {
     border-radius: 10px 0px 0px 0px;
     height: 90px;
     width: 600px
 }
+.ttlpreview h1 {
+    color: #d6cdc3;
+
+}
 
 .cardseditor {
-    height: 300px;
-    width: 600px;
-    border-radius: 0px 10px 0px 0px;
+    height: 250px;
+    width: 550px;
+    border-radius: 10px;
+    background-color: #e7ddd3;
 
 }
 
@@ -66,17 +78,53 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 50%;
+    gap: 30%;
     height: 45px;
-    width: 600px;
+    width: 550px;
     border-radius: 0px 10px 0px 0px;
 }
-.edit {
 
+.cards {
+    display: flex;
+    height: 200px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20%;
+}
+.cards canvas {
+    width: 105.88px;
+    height: 150px;
+    max-width: 105.88px;
+    max-height: 150px;
+    background-color: #465743;
+    border-radius: 5px;
+}
+.card {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.cards input {
+    width: 120px;
+}
+
+.ttlcards h2 {
+    color: #374735;
+
+}
+.edit {
     display: flex;
     flex-direction: column;
     height: 300px;
     width: 600px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    
 }
 .selectcards {
     display: flex;
@@ -85,15 +133,23 @@ main {
     text-align: center;
     justify-content: center;
     height: 45px;
-    width: 600px;
-    border-radius: 0px 10px 0px 0px;
+    width: 550px;
+    border-radius: 10px;
+    background-color: #192817;
+}
+.selectcards h2 {
+    color: #e7ddd3;
 }
 .editop {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     height: 255px;
-    width: 600px;
+    width: 550px;
     max-width: 600px;
+    background-color: #e7ddd3;
+    border-radius: 10px;
 }
 .op {
     display: flex;
@@ -101,5 +157,19 @@ main {
     width: 300px;
     align-items: center;
     justify-content: center;
-    gap: 10%;
+    gap: 30px;
+}
+.opit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #d6cdc3;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+}
+.opit h3 {
+    color: #374735;
+    font: italic;
 }
