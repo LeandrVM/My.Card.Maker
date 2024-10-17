@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card_Maker</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
-    <link rel="scriptsheet" type="text/script" href="scriptsheet.js" media="screen" />
 </head>
 <body>
+    <button id="teste">teste</button>
     <header>
         <h1>Logo</h1>
     </header>
@@ -17,7 +17,7 @@
                 <h1>Preview</h1>
             </div>
             <div class="prepreview">
-
+                <canvas id="canvaspreview" class="canvaspreview">
             </div>
         </div>
         <div class="editor">
@@ -28,12 +28,21 @@
                 </div>
                 <div class="cards">
                     <div class="card 01">
-                        <canvas id="front" width="60" height="60"></canvas>
-                        <input type="file" id="imagem1" accept="image/*">
+                        <img class="imgfront" src="./Imagens/Front00mini.png">
+                        <div class="cd">
+                            <div class="cdstema" id="cdstema">
+                                Tema
+                            </div>
+                            <div class="cdstexto">
+                                Texto
+                            </div>
+                            <div class="cdsowner">
+                                Owner
+                            </div>
+                        </div>
                     </div>
                     <div class="card 02">
-                        <canvas id="back" width="60" height="60"></canvas>
-                        <input type="file" id="imagem2" accept="image/*">
+                        <img src="./Imagens/Back.png">
                     </div>
                 </div>
             </div>
@@ -46,21 +55,21 @@
                     <div class="op 01">
                         <div class="opit Tema">
                             <h3>Tema</h3>
-                            <input>
+                            <input id="inptema" type="text" placeholder="Digite o Tema aqui" maxlength="20">
                         </div>
                         <div class="opit Texto">
                             <h3>Texto</h3>
-                            <input>
+                            <input id="inptexto" type="text" placeholder="Digite seu Texto aqui">
                         </div>
                     </div>
                     <div class="op 02">
                         <div class="opit Valor">
                             <h3>Valor</h3>
-                            <input>
+                            <input id="inpvalor" type="range" placeholder="Valor da carta" maxlength="3"> 
                         </div>
                         <div class="opit Owner">
                             <h3>Owner</h3>
-                            <input>
+                            <input id="inpowner" type="text" placeholder="Digite seu nome aqui" maxlength="10">
                         </div>
                     </div>
                 </div>
@@ -68,5 +77,59 @@
             
         </div>
     </main>
+
+
+    <script>
+        const inptema = document.getElementById('inptema');
+        const tema = document.getElementById('cdstema');
+        
+        inptema.addEventListener('inptema',function(){
+            tema.textContent = inptema.ariaValueText || 'n funfo';
+        })
+
+        function carregarImagemNoCanvas(idCanvas, caminhoImagem) {
+    var canvas = document.getElementById(idCanvas);
+    var ctx = canvas.getContext('2d');
+    var img = new Image();  // Cria um novo objeto de imagem
+    
+    img.src = caminhoImagem;  // Define o caminho da imagem
+
+    img.onload = function() {
+        // Limpa o canvas antes de desenhar
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Cálculo para manter a proporção
+        var proporcaoImagem = img.width / img.height;
+        var proporcaoCanvas = canvas.width / canvas.height;
+        var novoLargura, novoAltura;
+
+        if (proporcaoImagem > proporcaoCanvas) {
+            // A imagem é mais larga que o canvas
+            novoLargura = canvas.width;
+            novoAltura = canvas.width / proporcaoImagem;
+        } else {
+            // A imagem é mais alta que o canvas
+            novoAltura = img.height;
+            novoLargura = img.width;
+        }
+
+        // Centraliza a imagem no canvas
+        var posX = (canvas.width - novoLargura) / 2;
+        var posY = (canvas.height - novoAltura) / 2;
+
+        ctx.drawImage(img, posX, posY, novoLargura, novoAltura);
+    };
+
+    img.onerror = function() {
+        alert('Erro ao carregar a imagem. Verifique o caminho: ' + caminhoImagem);
+    };
+    }
+    var testebtn = document.getElementById('teste')
+    testebtn.addEventListener('click', function(){
+            tema.textContent = inptema.ariaValueText || 'n funfo';
+        })
+        
+        
+</script>
 </body>
 </html>
