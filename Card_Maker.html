@@ -50,7 +50,7 @@
             <div class="edit">
                 <div class="selectcards">
                     <button class="btnprev" id="btn_prev">Prev</button>
-                    <h2 id="Carta_Numero">Carta_0</h2>
+                    <h2 id="Carta_Numero">Carta</h2>
                     <button class="btnnext" id="btn_next">Next</button>
                 </div>
                 <div class="editop">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="opit Texto">
                             <h3>Texto</h3>
-                            <textarea id="input_texto" type="text" rows="   " cols="20"placeholder="Digite seu Texto aqui"></textarea>
+                            <textarea id="input_texto" type="text" rows="2" cols="20"placeholder="Digite seu Texto aqui"></textarea>
                         </div>
                     </div>
                     <div class="op02">
@@ -86,60 +86,130 @@
 
     <script>
         const InputTema = document.getElementById('input_tema');
-        const Tema = document.getElementById('card_tema');
-        
-        InputTema.addEventListener('input',function(){
-            Tema.innerText = InputTema.value || 'Tema';
-        })
+const Tema = document.getElementById('card_tema');
 
-        const InputTexto = document.getElementById('input_texto');
-        const Texto = document.getElementById('card_texto');
-        
-        InputTexto.addEventListener('input',function(){
-            Texto.innerText = InputTexto.value || 'Texto';
-        })
+InputTema.addEventListener('input', function() {
+    Tema.innerText = InputTema.value || 'Tema';
+});
 
-        const InputOwner = document.getElementById('input_owner');
-        const Owner = document.getElementById('card_owner');
-        
-        InputOwner.addEventListener('input',function(){
-            Owner.innerText = ('by- '+ InputOwner.value) || 'Owner';
-        })
-        
-        const range = document.getElementById('input_valor');
-        const valor = document.getElementById('input_carta');
-        const bgfront = document.getElementById('bg_front');
+const InputTexto = document.getElementById('input_texto');
+const Texto = document.getElementById('card_texto');
 
-        // Atualiza o valor exibido em tempo real
-        range.addEventListener('input', function() {
-            valor.innerText = range.value;
-            bgfront.src = `./Imagens/Front0${valor.innerText}mini.png`;
-        });
+InputTexto.addEventListener('input', function() {
+    Texto.innerText = InputTexto.value || 'Texto';
+});
 
-        // Exibe o valor inicial
-        valor.innerText = range.value;
+const InputOwner = document.getElementById('input_owner');
+const Owner = document.getElementById('card_owner');
 
-        const CartaNumero = document.getElementById('Carta-Numero'); 
-        let CartaAtual = 0;
-        const btnNext = document.getElementById('btn_next');
-        const btnPrev = document.getElementById('btn_prev');
-        btnNext.addEventListener('click',function(){
-            if (CartaAtual = 3){
-                CartaAtual += 0;
-                CartaNumero.innerText = `Carta_0${CartaAtual}`;
-            } else {
-                CartaAtual += 1;
-                CartaNumero.innerText = `Carta_0${CartaAtual}`;
-            }
-   
-        })
+InputOwner.addEventListener('input', function() {
+    Owner.innerText = InputOwner.value ? `by- ${InputOwner.value}` : 'Owner';
+});
 
+const range = document.getElementById('input_valor');
+const valor = document.getElementById('input_carta');
+const bgfront = document.getElementById('bg_front');
 
+// Atualiza o valor exibido em tempo real
+range.addEventListener('input', function() {
+    valor.innerText = range.value;
+    bgfront.src = `./Imagens/Front0${valor.innerText}mini.png`;
+});
+
+// Exibe o valor inicial
+valor.innerText = range.value;
+
+let CartaAtual = 1;
+const MaxCarta = 4;
+const btn_next = document.getElementById('btn_next');
+const btn_prev = document.getElementById('btn_prev');
+
+// Inicialização dos dados das cartas
+let TemData = {
+    1: '',
+    2: '',
+    3: '',
+    4: ''
+};
+
+let TexData = {
+    1: '',
+    2: '',
+    3: '',
+    4: ''
+};
+
+let ValData = {
+    1: '',
+    2: '',
+    3: '',
+    4: ''
+};
+
+let OwnData = {
+    1: '',
+    2: '',
+    3: '',
+    4: ''
+};
+
+// Função para atualizar o conteúdo da carta e o preview
+function updateCard() {
+    // Atualiza os inputs
+    document.getElementById("Carta_Numero").innerText = `Carta_${CartaAtual}`;
+    document.getElementById('input_tema').value = TemData[CartaAtual];
+    document.getElementById('input_texto').value = TexData[CartaAtual];
+    document.getElementById('input_owner').value = OwnData[CartaAtual];
+    document.getElementById('input_valor').value = ValData[CartaAtual];
     
+    // Atualiza o preview
+    Tema.innerText = TemData[CartaAtual] || 'Tema';
+    Texto.innerText = TexData[CartaAtual] || 'Texto';
+    Owner.innerText = OwnData[CartaAtual] ? `by- ${OwnData[CartaAtual]}` : 'Owner';
+    valor.innerText = ValData[CartaAtual] || 1;
+    bgfront.src = `./Imagens/Front0${ValData[CartaAtual] || 1}mini.png`;
+    
+    // Habilitar/desabilitar botões
+    document.getElementById("btn_prev").disabled = CartaAtual === 1;
+    document.getElementById("btn_next").disabled = CartaAtual === MaxCarta;
+}
+
+// Função para avançar para a próxima carta
+function nextCard() {
+    if (CartaAtual < MaxCarta) {
+        // Salva os valores atuais antes de mudar de carta
+        TemData[CartaAtual] = document.getElementById('input_tema').value;
+        TexData[CartaAtual] = document.getElementById('input_texto').value;
+        OwnData[CartaAtual] = document.getElementById('input_owner').value;
+        ValData[CartaAtual] = document.getElementById('input_valor').value;
         
+        CartaAtual++;
+        updateCard();
+    }
+}
+
+// Função para voltar para a carta anterior
+function previousCard() {
+    if (CartaAtual > 1) {
+        // Salva os valores atuais antes de mudar de carta
+        TemData[CartaAtual] = document.getElementById('input_tema').value;
+        TexData[CartaAtual] = document.getElementById('input_texto').value;
+        OwnData[CartaAtual] = document.getElementById('input_owner').value;
+        ValData[CartaAtual] = document.getElementById('input_valor').value;
         
-        
-        
+        CartaAtual--;
+        updateCard();
+    }
+}
+
+// Adiciona eventos aos botões de navegação
+btn_next.addEventListener("click", nextCard);
+btn_prev.addEventListener("click", previousCard);
+
+// Inicializa a primeira carta
+updateCard();
+
+
 </script>
 </body>
 </html>
