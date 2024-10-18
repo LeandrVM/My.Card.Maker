@@ -17,8 +17,38 @@
                 <h1>Preview</h1>
             </div>
             <div class="prepreview">
-                <canvas id="canvaspreview" class="canvaspreview">
+                <div class="numeracao">
+                    <div class="numeracao1">    
+                        <div>1</div>
+                        <div>3</div>
+                    </div>
+                    <div class="numeracao2">
+                        <div>2</div>
+                        <div>4</div>
+                    </div>
+                </div>
+                <div class="canpreview" id="a4-preview">
+                    <div class="a4-sheet" id="a4">
+                        <div class="paircard">
+                            <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
+                            <div class="cancard"><img src="./Imagens/Front00.png" id="canimg1" style="transform: rotate(-90deg) scale(0.32);"></div>
+                        </div>
+                        <div class="paircard">
+                            <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
+                            <div class="cancard"><img src="./Imagens/Front00.png" id="canimg2" style="transform: rotate(-90deg) scale(0.32);"></div>
+                        </div>
+                        <div class="paircard">
+                            <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
+                            <div class="cancard"><img src="./Imagens/Front00.png" id="canimg3" style="transform: rotate(-90deg) scale(0.32);"></div>
+                        </div>
+                        <div class="paircard">
+                            <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
+                            <div class="cancard"><img src="./Imagens/Front00.png" id="canimg4" style="transform: rotate(-90deg) scale(0.32);"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <button id="downloadBtn">Baixar Imagem</button>
         </div>
         <div class="editor">
             <div class="cardseditor">
@@ -83,7 +113,7 @@
         </div>
     </main>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const InputTema = document.getElementById('input_tema');
 const Tema = document.getElementById('card_tema');
@@ -109,11 +139,25 @@ InputOwner.addEventListener('input', function() {
 const range = document.getElementById('input_valor');
 const valor = document.getElementById('input_carta');
 const bgfront = document.getElementById('bg_front');
+const bgfront1 = document.getElementById('canimg1');
+const bgfront2 = document.getElementById('canimg2');
+const bgfront3 = document.getElementById('canimg3');
+const bgfront4 = document.getElementById('canimg4');
+
+
+ 
 
 // Atualiza o valor exibido em tempo real
 range.addEventListener('input', function() {
     valor.innerText = range.value;
+    ValData[CartaAtual] = valor.innerText
     bgfront.src = `./Imagens/Front0${valor.innerText}mini.png`;
+    bgfront1.src =  `./Imagens/Front0${ValData[1] || 0}.png`;
+    bgfront2.src =  `./Imagens/Front0${ValData[2] || 0}.png`;
+    bgfront3.src =  `./Imagens/Front0${ValData[3] || 0}.png`;
+    bgfront4.src =  `./Imagens/Front0${ValData[4] || 0}.png`;
+
+
 });
 
 // Exibe o valor inicial
@@ -123,6 +167,7 @@ let CartaAtual = 1;
 const MaxCarta = 4;
 const btn_next = document.getElementById('btn_next');
 const btn_prev = document.getElementById('btn_prev');
+
 
 // Inicialização dos dados das cartas
 let TemData = {
@@ -166,8 +211,12 @@ function updateCard() {
     Tema.innerText = TemData[CartaAtual] || 'Tema';
     Texto.innerText = TexData[CartaAtual] || 'Texto';
     Owner.innerText = OwnData[CartaAtual] ? `by- ${OwnData[CartaAtual]}` : 'Owner';
-    valor.innerText = ValData[CartaAtual] || 1;
-    bgfront.src = `./Imagens/Front0${ValData[CartaAtual] || 1}mini.png`;
+    valor.innerText = ValData[CartaAtual] || 0;
+    bgfront.src = `./Imagens/Front0${ValData[CartaAtual] || 0}mini.png`;
+    bgfront1.src =  `./Imagens/Front0${ValData[1] || 0}.png`; 
+    bgfront2.src =  `./Imagens/Front0${ValData[2] || 0}.png`; 
+    bgfront3.src =  `./Imagens/Front0${ValData[3] || 0}.png`;
+    bgfront4.src =  `./Imagens/Front0${ValData[4] || 0}.png`;
     
     // Habilitar/desabilitar botões
     document.getElementById("btn_prev").disabled = CartaAtual === 1;
@@ -206,6 +255,19 @@ function previousCard() {
 btn_next.addEventListener("click", nextCard);
 btn_prev.addEventListener("click", previousCard);
 
+        function downloadA4() {
+            const a4 = document.getElementById('a4');
+            html2canvas(a4, { scale: 2 }).then(function (canvas) {
+                let link = document.createElement('a');
+                link.download = 'cartas_a4.png';
+                link.href = canvas.toDataURL('image/png'); // Garante que o formato seja PNG
+                link.click();
+            });
+        };
+
+// Atualiza o valor exibido em tempo real
+
+document.getElementById('downloadBtn').addEventListener('click', downloadA4)
 // Inicializa a primeira carta
 updateCard();
 
