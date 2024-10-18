@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card_Maker</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <button id="teste">teste</button>
@@ -61,7 +62,7 @@
                 </div>
                 <div class="cards">
                     <div class="card 01">
-                        <img id="bg_front" class="imgfront" src="./Imagens/Front00mini.png">
+                        <img id="bg_front" class="imgfront" src="./Imagens/Front02.png">
                         <div class="cd">
                             <div class="cdstema" id="">
                                 <h1 id="card_tema">Tema</h1>
@@ -75,7 +76,7 @@
                         </div>
                     </div>
                     <div class="card 02">
-                        <img src="./Imagens/Back.png">
+                        <img id="bgbackcard" src="./Imagens/Back.png">
                     </div>
                 </div>
             </div>
@@ -101,7 +102,7 @@
                         <div class="opit Valor">
                             <h3>Valor</h3>
                             <div class="input_valor_completo">
-                                <input id="input_valor" type="range" placeholder="Valor da carta" min="0" max="3" value="0" step="1">
+                                <input id="input_valor" type="range" placeholder="Valor da carta" min="0" max="3" value="2" step="1">
                                 <p><span id="input_carta"></span></p>
                             </div>
                         </div>
@@ -116,7 +117,6 @@
         </div>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const InputTema = document.getElementById('input_tema');
 const Tema = document.getElementById('card_tema');
@@ -155,10 +155,10 @@ range.addEventListener('input', function() {
     valor.innerText = range.value;
     ValData[CartaAtual] = valor.innerText
     bgfront.src = `./Imagens/Front0${valor.innerText}mini.png`;
-    bgfront1.src =  `./Imagens/Front0${ValData[1] || 0}.png`;
-    bgfront2.src =  `./Imagens/Front0${ValData[2] || 0}.png`;
-    bgfront3.src =  `./Imagens/Front0${ValData[3] || 0}.png`;
-    bgfront4.src =  `./Imagens/Front0${ValData[4] || 0}.png`;
+    bgfront1.src =  `./Imagens/Front0${ValData[1] || 2}.png`;
+    bgfront2.src =  `./Imagens/Front0${ValData[2] || 2}.png`;
+    bgfront3.src =  `./Imagens/Front0${ValData[3] || 2}.png`;
+    bgfront4.src =  `./Imagens/Front0${ValData[4] || 2}.png`;
 
 
 });
@@ -214,12 +214,12 @@ function updateCard() {
     Tema.innerText = TemData[CartaAtual] || 'Tema';
     Texto.innerText = TexData[CartaAtual] || 'Texto';
     Owner.innerText = OwnData[CartaAtual] ? `by- ${OwnData[CartaAtual]}` : 'Owner';
-    valor.innerText = ValData[CartaAtual] || 0;
-    bgfront.src = `./Imagens/Front0${ValData[CartaAtual] || 0}mini.png`;
-    bgfront1.src =  `./Imagens/Front0${ValData[1] || 0}.png`; 
-    bgfront2.src =  `./Imagens/Front0${ValData[2] || 0}.png`; 
-    bgfront3.src =  `./Imagens/Front0${ValData[3] || 0}.png`;
-    bgfront4.src =  `./Imagens/Front0${ValData[4] || 0}.png`;
+    valor.innerText = ValData[CartaAtual] || 2;
+    bgfront.src = `./Imagens/Front0${ValData[CartaAtual] || 2}mini.png`;
+    bgfront1.src =  `./Imagens/Front0${ValData[1] || 2}.png`; 
+    bgfront2.src =  `./Imagens/Front0${ValData[2] || 2}.png`; 
+    bgfront3.src =  `./Imagens/Front0${ValData[3] || 2}.png`;
+    bgfront4.src =  `./Imagens/Front0${ValData[4] || 2}.png`;
     
     // Habilitar/desabilitar botões
     document.getElementById("btn_prev").disabled = CartaAtual === 1;
@@ -258,22 +258,175 @@ function previousCard() {
 btn_next.addEventListener("click", nextCard);
 btn_prev.addEventListener("click", previousCard);
 
-        function downloadA4() {
-            const a4 = document.getElementById('a4');
-            html2canvas(a4, { scale: 2 }).then(function (canvas) {
-                let link = document.createElement('a');
-                link.download = 'cartas_a4.png';
-                link.href = canvas.toDataURL('image/png'); // Garante que o formato seja PNG
-                link.click();
-            });
-        };
-
-// Atualiza o valor exibido em tempo real
-
-document.getElementById('downloadBtn').addEventListener('click', downloadA4)
-// Inicializa a primeira carta
 updateCard();
 
+
+
+        const bgcardpadrao = document.getElementById('bgbackcard')
+        const a4Width = 2480; // 210 mm em pixels (300 DPI)
+        const a4Height = 3508; // 297 mm em pixels (300 DPI)
+        const cardWidth = 744;  // 63 mm em pixels (300 DPI)
+        const cardHeight = 1039; // 88 mm em pixels (300 DPI)
+
+        // Espaçamento entre as duplas de cartas e entre fileiras
+        const spaceBetweenDuplas = 50; // Espaçamento entre as duplas
+        const spaceBetweenRows = 100; // Espaçamento entre as fileiras
+
+        // Função para carregar a imagem de input
+        function loadImageFromFile(inputElement) {
+            return new Promise((resolve, reject) => {
+                const file = inputElement.files[0];
+                if (!file) {
+                    reject("Nenhum arquivo foi selecionado.");
+                    return;
+                }
+
+                const img = new Image();
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    img.src = event.target.result;
+                    img.onload = () => resolve(img);
+                    img.onerror = reject;
+                };
+                reader.onerror = reject;
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Função para desenhar o texto na carta
+        function drawTextOnCard(ctx, text, x, y, fontSize = 40, fontColor = 'white', fontFamily = 'Arial') {
+            ctx.font = `${fontSize}px ${fontFamily}`;
+            ctx.fillStyle = fontColor;
+            ctx.textAlign = 'center'; // Centraliza o texto horizontalmente
+            ctx.fillText(text, x, y);
+        }
+
+        // Função para desenhar uma dupla de cartas (uma fixa e uma trocável)
+        function drawCardPair(ctx, fixedImg, changeableImg, startX, startY, tema, texto, criador) {
+            // Desenha a carta fixa
+            ctx.drawImage(fixedImg, startX, startY, cardWidth, cardHeight);
+            // Desenha a carta trocável
+            ctx.drawImage(changeableImg, startX + cardWidth, startY, cardWidth, cardHeight);
+
+            // Posição para desenhar o texto apenas na carta trocável
+            const cardX = startX + cardWidth + cardWidth / 2;
+
+            // Desenha o texto sobre a carta trocável
+            drawTextOnCard(ctx, texto, cardX, startY + cardHeight / 2, 40, 'white'); // Texto no meio
+            drawTextOnCard(ctx, tema, cardX, startY + 100, 50, 'white'); // Tema no topo
+            drawTextOnCard(ctx, criador, cardX, startY + cardHeight - 50, 35, 'white'); // Criador no rodapé
+        }
+
+        // Função para gerar a folha A4 com as cartas e baixar
+        async function generateAndDownload() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Define o tamanho do canvas para o tamanho da folha A4
+    canvas.width = a4Width;
+    canvas.height = a4Height;
+
+    // Fundo branco para a folha A4
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, a4Width, a4Height);
+
+    try {
+        const fixedImg = new Image();
+        fixedImg.crossOrigin = "anonymous"; // Adiciona esta linha
+        fixedImg.src = bgcardpadrao.src; // Aqui, certifique-se de que bgcardpadrao é um objeto de imagem
+
+        const img1 = new Image();
+        img1.crossOrigin = "anonymous"; // Adiciona esta linha
+        img1.src = bgfront1.src;
+
+        const img2 = new Image();
+        img2.crossOrigin = "anonymous"; // Adiciona esta linha
+        img2.src = bgfront2.src;
+
+        const img3 = new Image();
+        img3.crossOrigin = "anonymous"; // Adiciona esta linha
+        img3.src = bgfront3.src;
+
+        const img4 = new Image();
+        img4.crossOrigin = "anonymous"; // Adiciona esta linha
+        img4.src = bgfront4.src;
+
+        // Aguarda todas as imagens serem carregadas
+        await Promise.all([
+            fixedImg.decode(), 
+            img1.decode(), 
+            img2.decode(), 
+            img3.decode(), 
+            img4.decode()
+        ]);
+              
+                // Obtém os valores do tema, texto e criador de cada dupla
+                const tema1 = TemData[1];
+                const texto1 = TexData[1];
+                const criador1 = OwnData[1];
+
+                const tema2 = TemData[2];
+                const texto2 = TexData[2];
+                const criador2 = OwnData[2];
+
+                const tema3 = TemData[3];
+                const texto3 = TexData[3];
+                const criador3 = OwnData[3];
+
+                const tema4 = TemData[4];
+                const texto4 = TexData[4];
+                const criador4 = OwnData[4];
+
+                // Calcula a posição inicial para centralizar as duplas
+                const totalWidthForPairs = 2 * (2 * cardWidth + spaceBetweenDuplas);
+                const totalHeightForRows = 2 * cardHeight + spaceBetweenRows;
+
+                // Calcula a posição inicial para centralizar as duplas
+                const startX = (a4Height - totalWidthForPairs) / 2;
+                const startY = (a4Width - totalHeightForRows) / 2;
+
+                // Rotaciona o canvas em 90 graus
+                ctx.translate(a4Width / 2, a4Height / 2); // Muda o ponto de origem para o centro
+                ctx.rotate(90 * Math.PI / 180); // Rotaciona 90 graus
+                ctx.translate(-a4Height / 2, -a4Width / 2); // Muda de volta
+
+                // Desenha as duas duplas de cartas
+                for (let row = 0; row < 2; row++) {
+                    // Calcula o Y para cada fileira
+                    const currentY = startY + row * (cardHeight + spaceBetweenRows);
+
+                    for (let pair = 0; pair < 2; pair++) {
+                        // Calcula o X para cada dupla
+                        const currentX = startX + pair * (2 * cardWidth + spaceBetweenDuplas);
+
+                        // Desenha uma dupla de cartas com texto
+                        if (row === 0 && pair === 0) {
+                            drawCardPair(ctx, fixedImg, img1, currentX, currentY, tema1, texto1, criador1);
+                        } else if (row === 0 && pair === 1) {
+                            drawCardPair(ctx, fixedImg, img2, currentX, currentY, tema2, texto2, criador2);
+                        } else if (row === 1 && pair === 0) {
+                            drawCardPair(ctx, fixedImg, img3, currentX, currentY, tema3, texto3, criador3);
+                        } else if (row === 1 && pair === 1) {
+                            drawCardPair(ctx, fixedImg, img4, currentX, currentY, tema4, texto4, criador4);
+                        }
+                    }
+                }
+
+                // Cria o link para download da imagem
+                const link = document.createElement('a');
+        link.download = 'folhaA4_com_cartas_centralizadas.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    } catch (error) {
+        console.error("Erro: ", error);
+        alert("Erro ao gerar a imagem.");
+    }
+}
+        // Adiciona evento ao botão de download
+        document.getElementById('downloadBtn').addEventListener('click', generateAndDownload);
+        document.getElementById('downloadBtn').addEventListener('click', updateCard());
 
 </script>
 </body>
