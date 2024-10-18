@@ -28,16 +28,16 @@
                 </div>
                 <div class="cards">
                     <div class="card 01">
-                        <img class="imgfront" src="./Imagens/Front00mini.png">
+                        <img id="bg_front" class="imgfront" src="./Imagens/Front00mini.png">
                         <div class="cd">
-                            <div class="cdstema" id="cdstema">
-                                Tema
+                            <div class="cdstema" id="">
+                                <h1 id="card_tema">Tema</h1>
                             </div>
                             <div class="cdstexto">
-                                Texto
+                                <h2 id="card_texto">Texto</h2>
                             </div>
                             <div class="cdsowner">
-                                Owner
+                                <h2 id="card_owner">Owner</h2>
                             </div>
                         </div>
                     </div>
@@ -49,27 +49,32 @@
             
             <div class="edit">
                 <div class="selectcards">
-                    <h2>Cards</h2>
+                    <button class="btnprev" id="btn_prev">Prev</button>
+                    <h2 id="Carta_Numero">Carta_0</h2>
+                    <button class="btnnext" id="btn_next">Next</button>
                 </div>
                 <div class="editop">
                     <div class="op 01">
                         <div class="opit Tema">
                             <h3>Tema</h3>
-                            <input id="inptema" type="text" placeholder="Digite o Tema aqui" maxlength="20">
+                            <input id="input_tema" type="text" placeholder="Digite o Tema aqui" maxlength="20">
                         </div>
                         <div class="opit Texto">
                             <h3>Texto</h3>
-                            <input id="inptexto" type="text" placeholder="Digite seu Texto aqui">
+                            <textarea id="input_texto" type="text" rows="   " cols="20"placeholder="Digite seu Texto aqui"></textarea>
                         </div>
                     </div>
-                    <div class="op 02">
+                    <div class="op02">
                         <div class="opit Valor">
                             <h3>Valor</h3>
-                            <input id="inpvalor" type="range" placeholder="Valor da carta" maxlength="3"> 
+                            <div class="input_valor_completo">
+                                <input id="input_valor" type="range" placeholder="Valor da carta" min="0" max="3" value="0" step="1">
+                                <p><span id="input_carta"></span></p>
+                            </div>
                         </div>
                         <div class="opit Owner">
                             <h3>Owner</h3>
-                            <input id="inpowner" type="text" placeholder="Digite seu nome aqui" maxlength="10">
+                            <input id="input_owner" type="text" placeholder="Digite seu nome aqui" maxlength="10">
                         </div>
                     </div>
                 </div>
@@ -80,54 +85,59 @@
 
 
     <script>
-        const inptema = document.getElementById('inptema');
-        const tema = document.getElementById('cdstema');
+        const InputTema = document.getElementById('input_tema');
+        const Tema = document.getElementById('card_tema');
         
-        inptema.addEventListener('inptema',function(){
-            tema.textContent = inptema.ariaValueText || 'n funfo';
+        InputTema.addEventListener('input',function(){
+            Tema.innerText = InputTema.value || 'Tema';
         })
 
-        function carregarImagemNoCanvas(idCanvas, caminhoImagem) {
-    var canvas = document.getElementById(idCanvas);
-    var ctx = canvas.getContext('2d');
-    var img = new Image();  // Cria um novo objeto de imagem
+        const InputTexto = document.getElementById('input_texto');
+        const Texto = document.getElementById('card_texto');
+        
+        InputTexto.addEventListener('input',function(){
+            Texto.innerText = InputTexto.value || 'Texto';
+        })
+
+        const InputOwner = document.getElementById('input_owner');
+        const Owner = document.getElementById('card_owner');
+        
+        InputOwner.addEventListener('input',function(){
+            Owner.innerText = ('by- '+ InputOwner.value) || 'Owner';
+        })
+        
+        const range = document.getElementById('input_valor');
+        const valor = document.getElementById('input_carta');
+        const bgfront = document.getElementById('bg_front');
+
+        // Atualiza o valor exibido em tempo real
+        range.addEventListener('input', function() {
+            valor.innerText = range.value;
+            bgfront.src = `./Imagens/Front0${valor.innerText}mini.png`;
+        });
+
+        // Exibe o valor inicial
+        valor.innerText = range.value;
+
+        const CartaNumero = document.getElementById('Carta-Numero'); 
+        let CartaAtual = 0;
+        const btnNext = document.getElementById('btn_next');
+        const btnPrev = document.getElementById('btn_prev');
+        btnNext.addEventListener('click',function(){
+            if (CartaAtual = 3){
+                CartaAtual += 0;
+                CartaNumero.innerText = `Carta_0${CartaAtual}`;
+            } else {
+                CartaAtual += 1;
+                CartaNumero.innerText = `Carta_0${CartaAtual}`;
+            }
+   
+        })
+
+
     
-    img.src = caminhoImagem;  // Define o caminho da imagem
-
-    img.onload = function() {
-        // Limpa o canvas antes de desenhar
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Cálculo para manter a proporção
-        var proporcaoImagem = img.width / img.height;
-        var proporcaoCanvas = canvas.width / canvas.height;
-        var novoLargura, novoAltura;
-
-        if (proporcaoImagem > proporcaoCanvas) {
-            // A imagem é mais larga que o canvas
-            novoLargura = canvas.width;
-            novoAltura = canvas.width / proporcaoImagem;
-        } else {
-            // A imagem é mais alta que o canvas
-            novoAltura = img.height;
-            novoLargura = img.width;
-        }
-
-        // Centraliza a imagem no canvas
-        var posX = (canvas.width - novoLargura) / 2;
-        var posY = (canvas.height - novoAltura) / 2;
-
-        ctx.drawImage(img, posX, posY, novoLargura, novoAltura);
-    };
-
-    img.onerror = function() {
-        alert('Erro ao carregar a imagem. Verifique o caminho: ' + caminhoImagem);
-    };
-    }
-    var testebtn = document.getElementById('teste')
-    testebtn.addEventListener('click', function(){
-            tema.textContent = inptema.ariaValueText || 'n funfo';
-        })
+        
         
         
 </script>

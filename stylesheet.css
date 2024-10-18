@@ -78,10 +78,6 @@ main {
     border: solid 1px black;
     border-radius: 5px;
 }
-.cd div {
-    border: solid 1px rgb(148, 51, 51);
-}
-
 .cdstema {
     position: absolute;
     margin-top: -130px;
@@ -97,9 +93,20 @@ main {
     word-wrap: break-word; 
     text-overflow: ellipsis;
 }
+.cdstema h1 {
+    font-size: 8px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden; 
+    word-wrap: break-word; 
+    text-overflow: ellipsis;
+}
+
 .cdstexto {
     position: absolute;
-    max-width: 107px;
+    max-width: 90px;
     min-height: 90px;
     top: 14%;
     width: 100px;
@@ -111,7 +118,16 @@ main {
     overflow: hidden; 
     word-wrap: break-word; 
     text-overflow: ellipsis;
-    
+}
+.cdstexto h2 {
+    font-size: 6px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden; 
+    word-wrap: break-word; 
+    text-overflow: ellipsis;
 }
 .cdsowner {
     position: absolute;
@@ -119,17 +135,28 @@ main {
     width: 107px;
     max-height: 10px;
     min-height: 10px;
-    top: 113px;
+    top: 110px;
     font-size: 10px;
     text-align: center;
     justify-content: center;
     align-content: center;
-    font-size: 8px;
+    font-size: 6px;
     color: white;
     overflow: hidden; 
     word-wrap: break-word; 
     text-overflow: ellipsis;
 }
+.cdsowner h2{
+    font-size: 6px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden; 
+    word-wrap: break-word; 
+    text-overflow: ellipsis;
+}
+
 .cardseditor {
     height: 250px;
     width: 550px;
@@ -149,10 +176,13 @@ main {
     border-radius: 0px 10px 0px 0px;
 }
 
+#input_texto{
+    resize: none;
+    overflow: scroll;
+}
 .cards {
     display: flex;
     height: 200px;
-    border: solid black 1px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -208,6 +238,7 @@ main {
 .selectcards {
     display: flex;
     flex-direction: row;
+    gap: 30%;
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -236,7 +267,15 @@ main {
     width: 300px;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 10px;
+}
+.op02 {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 .opit {
     display: flex;
@@ -247,8 +286,12 @@ main {
     border-radius: 10px;
     padding: 10px;
     width: 200px;
+    height: 80px;
 }
 .opit h3 {
     color: #374735;
     font: italic;
+}
+.input_valor_completo {
+    width: 400px;
 }
