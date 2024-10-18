@@ -75,13 +75,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-.cancard img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .canpreview {
@@ -94,20 +87,31 @@ main {
     transform-origin: center; /* Define o ponto de origem da transformação */
     margin: 0 auto; /* Centraliza o preview */
     display: block; /* Mostra o preview inicialmente */
+    flex-direction: row;
+}
+.pair01{
+    border: #ff0000 1px solid;
+}
+.pair02{
+    border: #ff0000 px solid;
 }
 .a4-sheet {
     width: 210mm; /* Largura da folha A4 */
     height: 297mm; /* Altura da folha A4 */
-    background-color: white;
-    position: relative;
-    display: grid;
+    border: #000 2px solid;
+    position: absolute;
+    display: flex;
     grid-template-columns: repeat(2, 87mm); /* 2 colunas para as duplas */
     grid-template-rows: repeat(2, 126mm); /* 2 linhas para as duplas */
     gap: 10mm; /* Espaçamento entre as duplas de cartas */
     padding: 10mm; /* Margem interna de 10mm */
     border: none; /* Remove borda externa */
     box-sizing: border-box;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
 }
+
 .paircard {
     width: 87mm; /* Largura de uma carta */
     height: 126mm; /* Altura de duas cartas grudadas */
@@ -120,6 +124,7 @@ main {
     box-sizing: border-box;
 
 }
+
 .paircard {
     display: flex;
     justify-content: center;
