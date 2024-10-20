@@ -69,61 +69,64 @@ main {
 }
 
 .cancard {
-    width: 87mm; /* Largura de uma carta de baralho */
-    height: 63mm; /* Altura de uma carta de baralho */
-    background-color: lightblue; /* Cor das cartas */
+    width: 100.82px; /* Largura de uma carta de baralho */
+    height: 95.2px; /* Altura de uma carta de baralho */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .canpreview {
-    width: 210mm; /* Largura do preview */
-    height: 297mm; /* Altura do preview */
+
+    width: 364.0px; /* Largura da folha A4 */
+    height: 450px; /* Altura da folha A4 */
     background-color: white;
-    border: 1px solid #000;
-    position: relative;
-    transform: scale(0.4); /* Reduz o tamanho para 20% */
-    transform-origin: center; /* Define o ponto de origem da transformação */
-    margin: 0 auto; /* Centraliza o preview */
-    display: block; /* Mostra o preview inicialmente */
-    flex-direction: row;
+    display: flex;
+    gap: 10px; /* Espaçamento entre as duplas de cartas */
+    transform:scale(1);
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(155, 155, 155);
+
 }
+
+
 .pair01{
-    border: #ff0000 1px solid;
+
+    max-width: 315.39px;
+    height: 378.79px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 10px;
 }
 .pair02{
-    border: #ff0000 px solid;
-}
-.a4-sheet {
-    width: 210mm; /* Largura da folha A4 */
-    height: 297mm; /* Altura da folha A4 */
-    border: #000 2px solid;
-    position: absolute;
+   
+  
+    max-width: 315.39px;
+    height: 378.79px;
     display: flex;
-    grid-template-columns: repeat(2, 87mm); /* 2 colunas para as duplas */
-    grid-template-rows: repeat(2, 126mm); /* 2 linhas para as duplas */
-    gap: 10mm; /* Espaçamento entre as duplas de cartas */
-    padding: 10mm; /* Margem interna de 10mm */
-    border: none; /* Remove borda externa */
-    box-sizing: border-box;
-    justify-content: center;
+    flex-direction: column;
     align-content: center;
-    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
 
 .paircard {
-    width: 87mm; /* Largura de uma carta */
-    height: 126mm; /* Altura de duas cartas grudadas */
-    background-color: lightgray;
-    display: flex;
-    flex-direction: column; /* Coloca as cartas uma em cima da outra */
-    justify-content: space-between; /* Espaçamento uniforme entre as cartas */
-    align-items: stretch; /* Faz com que as cartas ocupem toda a largura */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
+        width: 140.86px; /* Largura de uma carta */
+        height: 190.91px; /* Altura de duas cartas grudadas */
+
+        display: flex;
+        flex-direction: column; /* Coloca as cartas uma em cima da outra */
+        justify-content: space-between; /* Espaçamento uniforme entre as cartas */
+        align-items: stretch; /* Faz com que as cartas ocupem toda a largura */
+
+        box-sizing: border-box;
 
 }
+
 
 .paircard {
     display: flex;
@@ -138,7 +141,6 @@ main {
     width:107.39px;
     height: 150px;
     position: absolute;
-    border: solid 1px black;
     border-radius: 5px;
 }
 .cdstema {
@@ -264,13 +266,7 @@ main {
     background-color: #465743;
     border-radius: 5px;
 }
-.canvaspreview {
-    max-height: 450px;
-    max-width: 318.18px;
-    height: 450px;
-    width: 318.18px;
-    background-color: white;
-}
+
 .card {
     width: 200,39px;
     height: 150px;
@@ -345,7 +341,7 @@ main {
     z-index: 10;
     width: 320px;
     height: 446px;
-    border: #000 1px solid;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -391,17 +387,7 @@ main {
     height: 63mm; /* Altura de uma carta de baralho */
     background-color: lightblue; /* Cor das cartas */
 }   
-.ppreview {
-    width: 210mm; /* Largura do preview */
-    height: 297mm; /* Altura do preview */
-    background-color: rgb(172, 60, 60);
-    border: 1px solid #000;
-    position: relative;
-    transform: scale(0.2); /* Reduz o tamanho para 20% */
-    transform-origin: top left; /* Define o ponto de origem da transformação */
-    margin: 0 auto; /* Centraliza o preview */
-    display: block; /* Mostra o preview inicialmente */
-}
+
 .opit {
     display: flex;
     flex-direction: column;

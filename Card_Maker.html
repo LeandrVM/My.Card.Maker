@@ -8,9 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <button id="teste">teste</button>
     <header>
-        <h1>Logo</h1>
+        <h1></h1>
     </header>
     <main>
         <div class="preview">
@@ -21,36 +20,34 @@
                 <div class="numeracao">
                     <div class="numeracao1">    
                         <div>1</div>
-                        <div>3</div>
+                        <div>2</div>
                     </div>
                     <div class="numeracao2">
-                        <div>2</div>
+                        <div>3</div>
                         <div>4</div>
                     </div>
                 </div>
-                <div class="canpreview" id="a4-preview">
-                    <canvas class="a4-sheet" id="myCanvas">
+                <div class="canpreview">
                         <div class="pair01">
                             <div class="paircard">
-                                <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
-                                <div class="cancard"><img src="./Imagens/Front00.png" id="canimg1" style="transform: rotate(-90deg) scale(0.32);"></div>
+                                <div class="cancard"><img src="./Imagens/Backmini.png" style="transform: rotate(-90deg) scale(0.21);"></div>
+                                <div class="cancard"><img src="./Imagens/Front00mini.png" id="canimg1" style="transform: rotate(-90deg) scale(0.21);"></div>
                             </div>
                             <div class="paircard">
-                                <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
-                                <div class="cancard"><img src="./Imagens/Front00.png" id="canimg2" style="transform: rotate(-90deg) scale(0.32);"></div>
+                                <div class="cancard"><img src="./Imagens/Backmini.png" style="transform: rotate(-90deg) scale(0.21);"></div>
+                                <div class="cancard"><img src="./Imagens/Front00mini.png" id="canimg2" style="transform: rotate(-90deg) scale(0.21);"></div>
                             </div>
                         </div>
                         <div class="pair02">
                             <div class="paircard">
-                                <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
-                                <div class="cancard"><img src="./Imagens/Front00.png" id="canimg3" style="transform: rotate(-90deg) scale(0.32);"></div>
+                                <div class="cancard"><img src="./Imagens/Backmini.png" style="transform: rotate(-90deg) scale(0.21);"></div>
+                                <div class="cancard"><img src="./Imagens/Front00mini.png" id="canimg3" style="transform: rotate(-90deg) scale(0.21);"></div>
                             </div>
                             <div class="paircard">
-                                <div class="cancard"><img src="./Imagens/Back.png" style="transform: rotate(-90deg) scale(0.32);"></div>
-                                <div class="cancard"><img src="./Imagens/Front00.png" id="canimg4" style="transform: rotate(-90deg) scale(0.32);"></div>
+                                <div class="cancard"><img src="./Imagens/Backmini.png" style="transform: rotate(-90deg) scale(0.21);"></div>
+                                <div class="cancard"><img src="./Imagens/Front00mini.png" id="canimg4" style="transform: rotate(-90deg) scale(0.21);"></div>
                             </div>
                         </div>
-                    </canvas>
                 </div>
             </div>
         </div>
@@ -151,10 +148,10 @@
             valor.innerText = range.value;
             ValData[CartaAtual] = valor.innerText;
             bgfront.src = `./Imagens/Front0${valor.innerText}mini.png`;
-            bgfront1.src =  `./Imagens/Front0${ValData[1] || 2}.png`;
-            bgfront2.src =  `./Imagens/Front0${ValData[2] || 2}.png`;
-            bgfront3.src =  `./Imagens/Front0${ValData[3] || 2}.png`;
-            bgfront4.src =  `./Imagens/Front0${ValData[4] || 2}.png`;
+            bgfront1.src =  `./Imagens/Front0${ValData[1] || 2}mini.png`;
+            bgfront2.src =  `./Imagens/Front0${ValData[2] || 2}mini.png`;
+            bgfront3.src =  `./Imagens/Front0${ValData[3] || 2}mini.png`;
+            bgfront4.src =  `./Imagens/Front0${ValData[4] || 2}mini.png`;
         });
     
         valor.innerText = range.value;
@@ -181,10 +178,10 @@
             Owner.innerText = OwnData[CartaAtual] ? `by- ${OwnData[CartaAtual]}` : 'Owner';
             valor.innerText = ValData[CartaAtual] || 2;
             bgfront.src = `./Imagens/Front0${ValData[CartaAtual] || 2}mini.png`;
-            bgfront1.src =  `./Imagens/Front0${ValData[1] || 2}.png`; 
-            bgfront2.src =  `./Imagens/Front0${ValData[2] || 2}.png`; 
-            bgfront3.src =  `./Imagens/Front0${ValData[3] || 2}.png`;
-            bgfront4.src =  `./Imagens/Front0${ValData[4] || 2}.png`;
+            bgfront1.src =  `./Imagens/Front0${ValData[1] || 2}mini.png`; 
+            bgfront2.src =  `./Imagens/Front0${ValData[2] || 2}mini.png`; 
+            bgfront3.src =  `./Imagens/Front0${ValData[3] || 2}mini.png`;
+            bgfront4.src =  `./Imagens/Front0${ValData[4] || 2}mini.png`;
             
             document.getElementById("btn_prev").disabled = CartaAtual === 1;
             document.getElementById("btn_next").disabled = CartaAtual === MaxCarta;
@@ -220,8 +217,8 @@
         updateCard();
     
         const bgcardpadrao = document.getElementById('bgbackcard');
-        const a4Width = 2480;
-        const a4Height = 3508;
+        const a4Width = 3508;
+        const a4Height = 2480;
         const cardWidth = 744;
         const cardHeight = 1039;
         const spaceBetweenDuplas = 50;
@@ -253,40 +250,64 @@
             ctx.font = `${fontSize}px ${fontFamily}`;
             ctx.fillStyle = fontColor;
             ctx.textAlign = 'center';
-            wrapText(ctx, text, x, y, 200, 40); // Chame wrapText para garantir que o texto se ajuste
+            wrapText(ctx, text, x, y, 650, 40, charLimit); // Chame wrapText para garantir que o texto se ajuste
         }
-    
+
+        const charLimit = 10; // Definindo o limite de caracteres
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight, charLimit) {
+    const lines = text.split('\n'); // Divide o texto em linhas
+    lines.forEach((lineText) => {
+        let line = '';
+        let charCount = 0; // Contador de caracteres na linha
+
+        for (let i = 0; i < lineText.length; i++) {
+            const char = lineText[i];
+
+            // Verifica se estamos excedendo o limite de caracteres
+            if (charCount < charLimit) {
+                line += char; // Adiciona o caractere à linha
+                charCount++; // Incrementa o contador
+            } else {
+                // Verifica se a linha se encaixa no maxWidth
+                const metrics = ctx.measureText(line);
+                const testWidth = metrics.width;
+
+                if (testWidth > maxWidth) {
+                    // Se a largura da linha de teste exceder maxWidth, imprime a linha atual
+                    ctx.fillText(line, x, y);
+                    y += lineHeight; // Pule a linha
+                    line = char; // Inicie uma nova linha com o caractere atual
+                    charCount = 1; // Reinicie o contador de caracteres
+                } else {
+                    // Se não exceder, apenas adicione o caractere atual
+                    line += char;
+                    charCount++;
+                }
+            }
+        }
+
+        // Imprime qualquer texto restante na linha
+        if (line.length > 0) {
+            ctx.fillText(line, x, y);
+        }
+        y += lineHeight; // Adiciona espaçamento após cada linha
+    });
+}
+
+
+
+
         function drawCardPair(ctx, fixedImg, changeableImg, startX, startY, tema, texto, criador) {
             ctx.drawImage(fixedImg, startX, startY, cardWidth, cardHeight);
             ctx.drawImage(changeableImg, startX + cardWidth, startY, cardWidth, cardHeight);
             const cardX = startX + cardWidth + cardWidth / 2;
-            drawTextOnCard(ctx, texto, cardX, startY + cardHeight / 2.2, 40, 'white', 'sans-serif');
+            drawTextOnCard(ctx, texto, cardX, startY + cardHeight / 2.2, 45, 'white', 'sans-serif');
             drawTextOnCard(ctx, tema, cardX, startY + 85, 50, 'white', 'sans-serif');
             drawTextOnCard(ctx, criador, cardX, startY + cardHeight - 195, 35, 'white', 'sans-serif');
         }
     
         const maxWidth = 180;  // Ajuste o valor para o limite da largura do texto nas cartas
         const lineHeight = 40; // Altura da linha entre o texto
-    
-        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-            const words = text.split(' ');
-            let line = '';
-    
-            words.forEach((word) => {
-                const testLine = line + word + ' ';
-                const metrics = ctx.measureText(testLine);
-                const testWidth = metrics.width;
-                
-                if (testWidth > maxWidth && line.length > 0) {
-                    ctx.fillText(line, x, y);
-                    line = word + ' ';
-                    y += lineHeight;
-                } else {
-                    line = testLine;
-                }
-            });
-            ctx.fillText(line, x, y);
-        }
     
         async function generateAndDownload() {
             const canvas = document.createElement('canvas');
